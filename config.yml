@@ -1,0 +1,24 @@
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+auth:
+  token:
+    realm: https://localhost:8080/realms/master/protocol/docker-v2/auth
+    service: docker-test
+    issuer: https://localhost:8080/realms/master
+    rootcertbundle: /var/lib/registry/public_key.crt
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
